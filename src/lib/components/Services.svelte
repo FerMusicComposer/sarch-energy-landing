@@ -1,5 +1,6 @@
 <script>
     import { Zap, Scale, FileText, Activity, House, TriangleAlert, Sun, Smartphone, ChartBar } from 'lucide-svelte';
+    import { openEmailClient } from '$lib/email';
 
     const services = [
         { icon: ChartBar, title: "Estudios de facturas", desc: "Analizamos tus facturas y detectamos sobrecostes, errores y potencias mal contratadas. Ajustamos tu tarifa para que pagues solo lo justo." },
@@ -39,7 +40,9 @@
                         {service.desc}
                     </p>
                     
-                    <button class="text-emerald-400 text-sm font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
+                    <button
+                        onclick={() => openEmailClient({ subject: `Información sobre ${service.title}`, body: `Hola, me interesa saber más sobre ${service.title}.` })}
+                        class="text-emerald-400 text-sm font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
                         Saber más <Zap size={14} />
                     </button>
                 </div>

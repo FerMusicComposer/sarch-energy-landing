@@ -1,5 +1,6 @@
 <script>
     import { Users, Building2, HardHat, Briefcase, ArrowRight } from 'lucide-svelte';
+    import { openEmailClient } from '$lib/email';
 </script>
 
 <section id="colaboradores" class="relative py-16 bg-slate-700 overflow-hidden">
@@ -38,7 +39,9 @@
                 </span>
             </div>
 
-            <button class="btn btn-outline-emerald px-6 py-2.5 text-sm group/btn">
+            <button
+                onclick={() => openEmailClient({ subject: 'Solicitud de Colaborador', body: 'Hola, me gustaría unirme como colaborador.' })}
+                class="btn btn-outline-emerald px-6 py-2.5 text-sm group/btn">
                 Unirse como colaborador
                 <ArrowRight size={16} class="ml-2 group-hover/btn:translate-x-1 transition-transform" />
             </button>

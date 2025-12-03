@@ -1,5 +1,40 @@
-<script>
+<script lang="ts">
     import { MapPin, Mail, Phone } from 'lucide-svelte';
+    import { COMPANY_EMAIL } from '$lib/email';
+
+    let name = $state('');
+    let emailAddress = $state('');
+    let message = $state('');
+    let status = $state<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+    async function handleSubmit(e: Event) {
+        e.preventDefault();
+        status = 'submitting';
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email: emailAddress, message })
+            });
+
+            if (response.ok) {
+                status = 'success';
+                name = '';
+                emailAddress = '';
+                message = '';
+                setTimeout(() => status = 'idle', 5000);
+            } else {
+                status = 'error';
+            }
+        } catch (error) {
+            console.error(error);
+            status = 'error';
+        }
+    }
+
 </script>
 
 <footer id="contacto" class="relative bg-slate-950 py-16 overflow-hidden">
@@ -45,29 +80,39 @@
             <div class="bg-slate-900/40 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl relative group">
                 <div class="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent rounded-2xl pointer-events-none"></div>
 
-                <form class="space-y-4 relative z-10">
+                <form onsubmit={handleSubmit} class="space-y-4 relative z-10">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
                             <label for="name" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Nombre</label>
-                            <input id="name" type="text" placeholder="Tu nombre" 
+                            <input bind:value={name} id="name" type="text" placeholder="Tu nombre" required
                                 class="w-full bg-slate-950/50 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all" />
                         </div>
                         <div class="space-y-1.5">
                             <label for="email" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Email</label>
-                            <input id="email" type="email" placeholder="tucorreo@ejemplo.com" 
+                            <input bind:value={emailAddress} id="email" type="email" placeholder="tucorreo@ejemplo.com" required
                                 class="w-full bg-slate-950/50 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all" />
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
                         <label for="message" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Mensaje</label>
-                        <textarea id="message" placeholder="¿En qué podemos ayudarte?" rows="3" 
+                        <textarea bind:value={message} id="message" placeholder="¿En qué podemos ayudarte?" rows="3" required
                             class="w-full bg-slate-950/50 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all resize-none"></textarea>
                     </div>
 
-                    <button class="btn btn-emerald w-full py-3 text-base shadow-emerald-900/20 mt-1">
-                        Enviar Consulta
+                    <button disabled={status === 'submitting'} class="btn btn-emerald w-full py-3 text-base shadow-emerald-900/20 mt-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                        {#if status === 'submitting'}
+                            Enviando...
+                        {:else if status === 'success'}
+                            ¡Enviado con éxito!
+                        {:else}
+                            Enviar Consulta
+                        {/if}
                     </button>
+                    
+                    {#if status === 'error'}
+                        <p class="text-red-400 text-xs text-center">Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.</p>
+                    {/if}
                 </form>
             </div>
         </div>

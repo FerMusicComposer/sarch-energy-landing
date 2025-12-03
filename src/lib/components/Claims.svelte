@@ -1,10 +1,16 @@
+<script>
+    import { openEmailClient } from '$lib/email';
+</script>
+
 <section id="reclamaciones" class="py-24 bg-slate-900 border-y border-slate-800">
     <div class="container mx-auto px-6 flex flex-col md:flex-row gap-16 items-center">
         
         <div class="md:w-1/2">
             <h2 class="text-3xl md:text-5xl font-bold mb-6">Reclamaciones y <br><span class="text-emerald-400">Defensa del Consumidor</span></h2>
             <p class="text-lg text-slate-300 mb-8">No dejes que las compañías energéticas cobren de más. Nosotros gestionamos el conflicto.</p>
-            <button class="btn btn-white px-8 py-3">
+            <button
+                onclick={() => openEmailClient({ subject: 'Iniciar Reclamación', body: 'Hola, quiero iniciar una reclamación.' })}
+                class="btn btn-white px-8 py-3">
                 Iniciar Reclamación
             </button>
         </div>

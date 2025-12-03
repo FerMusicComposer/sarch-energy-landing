@@ -1,5 +1,6 @@
 <script>
     import { ArrowRight } from 'lucide-svelte';
+    import { openEmailClient } from '$lib/email';
 </script>
 
 <section id="inicio" class="relative min-h-screen flex items-center overflow-hidden bg-slate-950">
@@ -23,12 +24,16 @@
             </p>
             
             <div class="flex flex-col md:flex-row gap-4">
-                <button class="btn btn-emerald px-8 py-4 text-lg gap-2">
+                <button
+                    onclick={() => openEmailClient({ subject: 'Subir factura', body: 'Hola, adjunto mi factura para su revisión.' })}
+                    class="btn btn-emerald px-8 py-4 text-lg gap-2">
                     Sube tu factura
                     <ArrowRight size={20} />
                 </button>
                 
-                <button class="btn btn-outline px-8 py-4">
+                <button
+                    onclick={() => openEmailClient({ subject: 'Contacto agencia', body: 'Hola, me gustaría recibir más información.' })}
+                    class="btn btn-outline px-8 py-4">
                     Contactar agencia
                 </button>
             </div>

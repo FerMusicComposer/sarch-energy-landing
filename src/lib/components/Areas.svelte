@@ -1,5 +1,6 @@
 <script>
     import { CircleCheck } from 'lucide-svelte';
+    import { openEmailClient } from '$lib/email';
 
     let activeTab = $state('viviendas');
 
@@ -74,7 +75,11 @@
                                 </div>
                             </li>
                         </ul>
-                        <button class="btn btn-white px-6 py-3">Optimizar mi casa</button>
+                        <button
+                            onclick={() => openEmailClient({ subject: 'Optimizar mi casa', body: 'Hola, me gustaría optimizar los costes de mi hogar.' })}
+                            class="btn btn-white px-6 py-3">
+                            Optimizar mi casa
+                        </button>
                     </div>
                     <div class="h-[400px] bg-slate-900 rounded-2xl overflow-hidden relative border border-slate-800 shadow-2xl shadow-emerald-900/10">
                         <img src="/images/people-at-home.avif" alt="Hogar cálido" class="w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-700" />
@@ -116,7 +121,11 @@
                                 </div>
                             </li>
                         </ul>
-                        <button class="btn btn-blue px-6 py-3">Auditoría para empresa</button>
+                        <button
+                            onclick={() => openEmailClient({ subject: 'Auditoría para empresa', body: 'Hola, solicito información para una auditoría energética para mi empresa.' })}
+                            class="btn btn-blue px-6 py-3">
+                            Auditoría para empresa
+                        </button>
                     </div>
                     <div class="h-[400px] bg-slate-900 rounded-2xl overflow-hidden relative border border-slate-800 shadow-2xl shadow-blue-900/10">
                         <img src="/images/office.avif" alt="Oficina moderna" class="w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-700" />
