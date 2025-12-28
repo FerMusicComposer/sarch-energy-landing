@@ -42,7 +42,10 @@
                     
                     <button
                         onclick={() => openEmailClient({ subject: `Información sobre ${service.title}`, body: `Hola, me interesa saber más sobre ${service.title}.` })}
-                        class="text-emerald-400 text-sm font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
+                        class="text-emerald-400 text-sm font-semibold flex items-center gap-1 
+                            opacity-100 md:opacity-0 md:group-hover:opacity-100 
+                            transition-all duration-300 
+                            translate-x-0 md:-translate-x-2 md:group-hover:translate-x-0">
                         Saber más <Zap size={14} />
                     </button>
                 </div>

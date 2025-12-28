@@ -80,7 +80,7 @@
             <div class="bg-slate-900/40 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl relative group">
                 <div class="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent rounded-2xl pointer-events-none"></div>
 
-                <!-- <form onsubmit={handleSubmit} class="space-y-4 relative z-10">
+                <form onsubmit={handleSubmit} class="space-y-4 relative z-10">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
                             <label for="name" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Nombre</label>
@@ -113,7 +113,7 @@
                     {#if status === 'error'}
                         <p class="text-red-400 text-xs text-center">Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.</p>
                     {/if} 
-                </form>-->
+                </form>
             </div>
         </div>
         

@@ -16,7 +16,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		const { data, error } = await resend.emails.send({
-			from: 'Sarch Web <onboarding@resend.dev>', // Update this to your verified domain later
+			from: COMPANY_EMAIL,
 			to: [COMPANY_EMAIL],
 			subject: `Nueva consulta web de ${name}`,
 			replyTo: email,
